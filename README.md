@@ -7,8 +7,11 @@ Goals:
   3. The users are able to search among their email and forward emails to any user.
 
 Confirguration, Systems, and Tools:
-  Language: Python
+  
+    Language: Python
   
 Staff:
-  David Zheng (GitHub ID: dz183)
-  Grayson Ball (GitHub ID: gb968)
+
+ 	David Zheng (GitHub ID: dz183)  
+  
+	Grayson Ball (GitHub ID: gb968)
