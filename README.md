@@ -6,8 +6,9 @@ Goals:
   2. The users are able to compose, edit, and sent emails to any user along with attachments (images, files, etc).
   3. The users are able to search among their email and forward emails to any user.
 
-Confirguration, Systems, and Tools
-  Language: TBD
+Confirguration, Systems, and Tools:
+  Language: Python
   
-Staff
-   Lead - David Zheng (GitHub ID: dz183)
+Staff:
+  David Zheng (GitHub ID: dz183)
+  Grayson Ball (GitHub ID: gb968)
