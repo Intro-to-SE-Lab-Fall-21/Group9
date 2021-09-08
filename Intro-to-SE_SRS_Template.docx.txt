@@ -1,0 +1,141 @@
+﻿Software Requirements Specification
+for
+<Email Client>
+Version 1.0 approved
+Prepared by David Zheng and Grayson Ball
+Group 9 of Intro to Software Engineering
+Sep 8, 2021
+1. Introduction
+   1. Purpose 
+        We will be creating a new email system. Our goal is to create a working system that is able to accomplish, but not limited to the following actions:
+
+
+1. User should be able to login (and out of the system) and access their email
+2. User should be able to compose, edit, and send an email to other users
+3. A user should be able to search and forward emails to other users
+4. A user should be able to send attachments (image, files, etc.) along with an email
+
+
+We will also work on developing a nice interface along with other potential features such as deleting after these main goals have been achieved.
+
+
+The email system will be developed primarily with Python, but other languages will be used as needed.
+   2. Document Conventions
+TBD
+   3. Intended Audience and Reading 
+
+
+This document is intended mainly for project managers and developers. It will be used as a guideline when developing the project. This document is sorted into 5 sections, the introduction which is used to describe the project and this document, the overall description which is used to describe the scope of the project, the system features section which describes the features that will be implemented into the email system, the nonfunctional requirements will be used to layout a guideline for quality assurance, and the appendix is used to give additional information about the topics covered in this document.
+   4. Product Scope
+
+
+The email system will include other features that aren’t available at the start in the future, but for our current goal, we are looking to include these abilities:
+
+
+1. User should be able to login (and out of the system) and access his/her email
+2. User should be able to compose, edit, and send an email to other users
+3. A user should be able to search and forward emails to other users
+4. A user should be able to send attachments (image, files, etc.) along with an email
+
+
+The email system will be created using Python primarily, but we will also be looking at other languages as needed.
+
+
+The email system is targeting all types of users such as work, school, personal, and etc. We hope for all groups of life to be able to gather and send messages and information to one another while including some features that other email systems lack.
+
+
+   5. References
+TBD
+2. Overall Description
+   1. Product Perspective
+This product is a completely new product designed from scratch based around the existing email system.
+   2. Product Functions
+
+
+1. User should be able to login (and out of the system) and access his/her email
+2. User should be able to compose, edit, and send an email to other users
+3. User should be able to search and forward emails to other users
+4. User should be able to send attachments (image, files, etc.) along with an email
+
+
+   3. User Classes and Characteristics
+
+
+There will be two classes using this product: admins and regular users.
+   4. Operating Environment
+The product will run on any system compatible with running Python programs.
+   5. Design and Implementation Constraints
+There are currently none besides being unable to use hardware we do not have.
+3. System Features
+   1. Login
+4.1.1        Description and Priority
+It is important to us that users are able to readily and easily login to their email. This feature has a high priority as it enables users to access our system. It also has a huge risk factor as the risk of unknown users gaining access to another person’s account is a safety and privacy concern. 
+
+
+4.1.2        Stimulus/Response Sequences
+The user will be prompted to enter two key pieces of information upon accessing our email system: username and password. The user will enter both of these information and the system will match it to the database and certify that the user is present in the system. If the user is present, the system will enable the user access to their emails and the remaining features. If the user is not present or entered the incorrect information, they will be prompt to try again.
+
+
+4.1.3        Functional Requirements
+REQ-1:        The user must be able to enter their username and password
+REQ-2:        The user should have access to their email upon entering the correct information
+REQ-3:        Upon entering the incorrect information, they will be prompt to try again.
+REQ-4:        A database must be created, store and maintain records of usernames and passwords.
+   2. Compose, Edit, and Send
+4.2.1        Description and Priority
+                This feature should allow users to compose and edit emails from scratch and send the composed emails. This feature is high priority and without it the rest of the features would not be useful.
+4.2.2        Stimulus/Response Sequences
+                Compose and Edit: There will be a button which will allow the user to start composing and editing an email
+                Send: Once the user is ready to send the email, they can input who they wish to send it to and send it to any specified user.
+4.2.3        Functional Requirements
+                This feature must have a way to send emails to a valid email address and should have a limitation on the maximum size of the email sent.
+REQ-1:        A way to send emails
+REQ-2:        A way to check if emails are valid before sending
+REQ-3:         A limit on the maximum size of the email being sent
+   3. Search and Forward 
+4.3.1        Description and Priority
+                This feature will allow users to search previously received and sent emails as well as forward them to another valid email address using the send feature previously described. This feature is medium-low priority and will not be usable until other higher priority features are completed. 
+4.3.2        Stimulus/Response Sequences
+                Search: There will be a search bar which will allow the user to find matching words or phrases amongst previously received and sent emails.
+                Forward: There will be a button on any previously received or sent email to forward them to another valid email address.
+4.3.3        Functional Requirements
+REQ-1:        Search requires storage of previously sent and received emails and an efficient way to iterate through them searching for words or phrases
+REQ-2:        Forward requires the send feature to be implemented and will make use of its functionality
+
+
+   4. Send Attachments
+4.4.1        Description and Priority
+                This feature will allow users to upload and attach files to send them along with their emails. The priority for this feature is medium and requires the implementation of the Compose, Edit, and Send before it can be used. It’s overall priority is low.
+4.4.2        Stimulus/Response Sequences
+                Send Attachments: When composing or editing an email there will be a button which will allow you to attach files to the email before sending.
+4.4.3        Functional Requirements
+REQ-1:        The system must be able to find the attachment and include it before sending it to the other user.
+
+
+4. Other Nonfunctional Requirements
+   1. Performance Requirements
+        No feature should be more computationally expensive than another within reason besides the search function which will likely be the most expensive operation.
+   2. Safety Requirements
+        TBD
+   3. Security Requirements
+1. Login information of other users should not be accessible to any user.
+2. Only serve emails which the user should have access to.
+3. More TBD
+   1. Software Quality Attributes
+1. The email system should be able to correctly match the user and password within the database as well as store the relevant emails to the account. 
+2. Emails should arrive in the other user's email upon being sent.
+3. System should be reliable and without any major issues and concerns.
+5. Other Requirements
+TBD
+Appendix A: Glossary
+TBD
+Appendix B: Analysis Models
+TBD
+Appendix C: To Be Determined List
+* Document Conventions
+* Other Requirements
+* Safety Requirements
+* Security Requirements
+* References
+* Appendix A
+* Appendix B
