@@ -1,5 +1,5 @@
 # Group9
-This repository is an attempt to create a new emailing system, temporary named Athena, that has most, if not all, the important and essential components of an email. 
+This repository is an attempt to create a new emailing system that has most, if not all, the important and essential components of an email. 
 
 Goals: 
   1. The users are able to login to his account to access his emails.
@@ -9,6 +9,7 @@ Goals:
 Confirguration, Systems, and Tools:
   
     Language: Python
+    Techniques: TBD
   
 Staff:
 
