@@ -10,6 +10,7 @@ Confirguration, Systems, and Tools:
   
     Language: Python
     Techniques: TBD
+    Other Systems: Django and CI (TBD: Travis CI)
   
 Staff:
 
