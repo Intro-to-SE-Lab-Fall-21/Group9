@@ -1,13 +1,13 @@
 ﻿Software Requirements Specification
 for
-<Email Client>
+<Email Client - gp9>
 Version 1.0 approved
 Prepared by David Zheng and Grayson Ball
 Group 9 of Intro to Software Engineering
 Sep 8, 2021
 1. Introduction
    1. Purpose 
-        We will be creating a new email system. Our goal is to create a working system that is able to accomplish, but not limited to the following actions:
+        We will be creating a new email system called gp9. Our goal is to create a working system that is able to accomplish, but not limited to the following actions:
 
 
 1. User should be able to login (and out of the system) and access their email
@@ -38,7 +38,7 @@ The email system will include other features that aren’t available at the star
 4. A user should be able to send attachments (image, files, etc.) along with an email
 
 
-The email system will be created using Python primarily, but we will also be looking at other languages as needed.
+The email system, gp9, will be created using Python primarily, but we will also be looking at other languages as needed. We have also decided to use Django and potentially, Travis CI.
 
 
 The email system is targeting all types of users such as work, school, personal, and etc. We hope for all groups of life to be able to gather and send messages and information to one another while including some features that other email systems lack.
