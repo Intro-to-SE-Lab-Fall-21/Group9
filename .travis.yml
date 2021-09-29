@@ -3,7 +3,7 @@ python:
   - "3.9"
 before_install:
   - pip install -U pytest
-install:
-  - pip install -r App/requirements.txt
+#install:
+#  - pip install -r App/requirements.txt
 script:
   - pytest
