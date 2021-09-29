@@ -9,12 +9,12 @@ python:
   - "3.9-dev"  # 3.9 development branch
   - "nightly"  # nightly build
 
-#virtualenv:
-#  system_site_packages: true
+virtualenv:
+  system_site_packages: true
 
 #command to install dependencies
-#install:
-#  - pip install -r requirements.txt
-# command to run tests
-#script:
-#  - pytest
+install:
+  - pip install -r requirements.txt
+#command to run tests
+script:
+  - pytest
