@@ -8,4 +8,4 @@ install:
   -skip
 
 script: 
-  - python test_gp9.py
+  - py test_gp9.py
