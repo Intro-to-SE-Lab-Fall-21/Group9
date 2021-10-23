@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'emails'
+    'emails',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media'
             ],
         },
     },
@@ -123,3 +124,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+
+#Production Backend
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#Prints to Console
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#Stores in local memory
+#EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+#Stores to file location
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+
+MEDIA_ROOT = "emails/media"
+EMAIL_FILE_PATH = f"{MEDIA_ROOT}/email_out"
