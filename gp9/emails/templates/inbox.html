@@ -1,4 +1,6 @@
 <h1>Inbox</h1>
+<a href="/homepage">Homepage</a>
+<br>
 {% if user.is_authenticated %}
     {%if user.is_superuser%}
     <a href="/admin">Admin page</a>
@@ -6,7 +8,7 @@
     {% endif %}
     <a>Welcome, {{user.username}}</a>
     <br>
-    <a href="/compose">Compose</a>
+    <a href="/compose/">Compose</a>
     <br>
     
     {% if inbox %}

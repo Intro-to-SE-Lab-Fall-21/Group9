@@ -5,7 +5,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic.list import ListView
-from django.core.mail import BadHeaderError, send_mail
+from django.core.mail import BadHeaderError, send_mail, EmailMessage
 from django.http import HttpResponse, HttpResponseRedirect
 import os
 from django.conf import settings
@@ -19,14 +19,22 @@ def compose(request):
 			subject = form.cleaned_data['subject']
 			message = form.cleaned_data['message']
 			recipient = form.cleaned_data['recipient']
+			
 			sender = str(username)+'@gp9.com'
 			try:
-				send_mail(subject, message, sender, [recipient])
+				msg = EmailMessage(subject, message, sender, [recipient])
+				try:
+					file = form.cleaned_data['file']
+					msg.attach(file)
+				except:
+					x=0
+				msg.send()
+				#send_mail(subject, message, sender, [recipient])
 			except BadHeaderError:
 				return HttpResponse('Invalid header found.')
 			#return HttpResponse('Sent.')
 			messages.success(request, 'Message sent.')
-			return HttpResponseRedirect('compose')
+			return HttpResponseRedirect('/compose')
 		else:
 			return HttpResponse('Make sure all fields are entered and valid.')
 	return render(request, 'compose.html', {'form': form})

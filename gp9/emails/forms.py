@@ -1,3 +1,4 @@
+from typing import Optional
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -22,3 +23,5 @@ class ComposeMessage(forms.Form):
 	subject = forms.CharField(label='Subject')
 	message = forms.CharField(label='Message')
 	recipient = forms.EmailField(label='Recipient')
+	#file = forms.FileField(label='Attatchment')
+	file = forms.FileField(required=False, label='Attatchment')
