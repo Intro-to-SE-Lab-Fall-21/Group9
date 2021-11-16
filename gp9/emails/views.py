@@ -27,20 +27,15 @@ def compose(request):
 					file = form.cleaned_data['file']
 					msg.attach(file)
 				except:
-					x=0
+					pass
 				msg.send()
-				#send_mail(subject, message, sender, [recipient])
 			except BadHeaderError:
 				return HttpResponse('Invalid header found.')
-			#return HttpResponse('Sent.')
 			messages.success(request, 'Message sent.')
 			return HttpResponseRedirect('/compose')
 		else:
 			return HttpResponse('Make sure all fields are entered and valid.')
 	return render(request, 'compose.html', {'form': form})
-    #subject = request.POST.get('subject', '')
-    #message = request.POST.get('message', '')
-    #to_email = request.POST.get('to_email', '')
 
 def homepage(request):
 	return render(request=request, template_name='homepage.html')
@@ -81,8 +76,46 @@ def logout_request(request):
 	return redirect("emails:homepage")
 
 def inbox(request):
-
-    path = f"{settings.MEDIA_ROOT}/email_out"
-    inbox = os.listdir(path)
-
-    return render(request, "inbox.html", context={"inbox": inbox})
+	username = None
+	inbox = []
+	username = request.user.username
+	path = f"{settings.MEDIA_ROOT}/email_out"
+	files = os.listdir(path)
+	for filename in files:
+		with open(path+"/"+filename) as f:
+			lines = f.readlines()
+			i = 0
+			linesubj=""
+			linefrom=""
+			lineto=""
+			linedate=""
+			linemsg=""
+			for line in lines:
+				i = i+1
+				#ignore
+				if i <= 3 or i == 8:
+					pass
+				#subject
+				elif i == 4:
+					linesubj = line
+				#from
+				elif i == 5:
+					linefrom = line
+				#to
+				elif i == 6:
+					lineto = line
+					#if "To: "+username+"@gp9.com" in line:
+						#inbox += [filename]
+						#pass
+				#date
+				elif i == 7:
+					linedate = line
+				#message
+				else:
+					if "-------------------------------------------------------------------------------" in line:
+						pass
+					else:
+						linemsg += line
+			if "to: "+username+"@gp9.com" in lineto.lower():
+				inbox.append({'subject': linesubj,'from':linefrom,'to':lineto,'date':linedate,'msg':linemsg})
+	return render(request, "inbox.html", context={"inbox": inbox})

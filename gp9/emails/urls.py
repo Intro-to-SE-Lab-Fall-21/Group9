@@ -6,6 +6,8 @@ app_name = "emails"
 
 urlpatterns = [
     path("", views.homepage, name="homepage"),
+    path("homepage/", views.homepage, name="homepage"),
+    path("homepage", views.homepage, name="homepage"),
     path("register/", views.register_request, name="register"),
     path("register", views.register_request, name="register"),
     path("login/", views.login_request, name="login"),

@@ -15,7 +15,11 @@
         <ul>
         {% for msg in inbox %}
         <li>
-            <a href="{{ MEDIA_URL }}email_out/{{msg}}">{{ msg }}</a>
+            {{ msg.subject }}<br>
+            {{ msg.from }}<br>
+            {{ msg.to }}<br>
+            {{ msg.date }}<br>
+            {{ msg.msg}}<br>
         </li>
         {% endfor %}
         </ul>

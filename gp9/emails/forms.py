@@ -23,5 +23,4 @@ class ComposeMessage(forms.Form):
 	subject = forms.CharField(label='Subject')
 	message = forms.CharField(label='Message')
 	recipient = forms.EmailField(label='Recipient')
-	#file = forms.FileField(label='Attatchment')
 	file = forms.FileField(required=False, label='Attatchment')
