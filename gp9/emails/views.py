@@ -82,16 +82,35 @@ def inbox(request):
 	path = f"{settings.MEDIA_ROOT}/email_out"
 	files = os.listdir(path)
 	to_remove = ""
+	to_favorite = ""
+	to_unfavorite = ""
+	to_search = ""
+	is_search = False
 	removed = False
 	if(request.GET.get('delete_email')):
 		if(request.GET.get('email_delete')):
 			to_remove = str(request.GET.get('email_delete'))
+	if(request.GET.get('favorite_email')):
+				if(request.GET.get('email_favorite')):
+					to_favorite = str(request.GET.get('email_favorite'))
+	if(request.GET.get('unfavorite_email')):
+				if(request.GET.get('email_unfavorite')):
+					to_unfavorite = str(request.GET.get('email_unfavorite'))
+	if(request.GET.get('search_email')):
+		to_search = str(request.GET.get('email_search'))
+		is_search = True
 	for filename in files:
 		if to_remove == filename:
 			os.remove(path+"/"+filename)
 		else:
-			with open(path+"/"+filename) as f:
-				lines = f.readlines()
+			with open(path+"/"+filename,'r') as f:
+				lines = f.readlines()								
+				with open(path+"/"+filename,'w') as fw:
+					if to_favorite == filename:
+							lines[9] = "Favorite: True\n"
+					if to_unfavorite == filename:
+						lines[9] = "Favorite: False\n"
+					fw.writelines(lines)
 				i = 0
 				linesubj=""
 				linefrom=""
@@ -99,10 +118,12 @@ def inbox(request):
 				linedate=""
 				linemsg=""
 				lineid = ""
+				linefav = ""
+				fav_to = False
 				for line in lines:
 					i = i+1
 					#ignore
-					if i <= 3 or i == 8:
+					if i <= 3 or i == 8 or i == 9:
 						pass
 					#subject
 					elif i == 4:
@@ -117,12 +138,25 @@ def inbox(request):
 					elif i == 7:
 						linedate = line
 					#message
+					elif i == 10:
+						linefav = line
+						if "True" in line:
+							fav_to = True
 					else:
 						if "-------------------------------------------------------------------------------" in line:
 							pass
 						else:
 							linemsg += line
 			if "to: "+username+"@gp9.com" in lineto.lower():
-				#if not removed:
-				inbox.append({'subject': linesubj,'from':linefrom,'to':lineto,'date':linedate,'msg':linemsg,'id':filename})
+				if is_search:
+					if to_search in linesubj or to_search in linefrom or to_search in lineto or to_search in linedate or to_search in linemsg:
+						if fav_to:
+							inbox.append({'subject': linesubj,'from':linefrom,'to':lineto,'date':linedate,'msg':linemsg,'id':filename,'favorite':linefav})
+						else:			
+							inbox.append({'subject': linesubj,'from':linefrom,'to':lineto,'date':linedate,'msg':linemsg,'id':filename})
+				else:
+					if fav_to:
+						inbox.append({'subject': linesubj,'from':linefrom,'to':lineto,'date':linedate,'msg':linemsg,'id':filename,'favorite':linefav})
+					else:			
+						inbox.append({'subject': linesubj,'from':linefrom,'to':lineto,'date':linedate,'msg':linemsg,'id':filename})
 	return render(request, "inbox.html", context={"inbox": inbox})

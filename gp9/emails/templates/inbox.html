@@ -3,24 +3,40 @@
 <br>
 {% if user.is_authenticated %}
     {%if user.is_superuser%}
-    <a href="/admin">Admin page</a>
+    <a href="/admin/">Admin page</a>
     <br>
     {% endif %}
     <a>Welcome, {{user.username}}</a>
     <br>
     <a href="/compose/">Compose</a>
     <br>
-    
+    <form action="#" method="get">
+        <input type="text" value="" name = "email_search">
+        <input type="submit"  value="Search" name="search_email">
+    </form>
     {% if inbox %}
         <ul>
         {% for msg in inbox %}
         <li>
-            
             {{ msg.subject }}<br>
             {{ msg.from }}<br>
             {{ msg.date }}<br>
             {{ msg.msg}}<br>
+            
+
         </li>
+        {% if msg.favorite %}
+            {{ msg.favorite}}<br>
+            <form action="#" method="get">
+                <input type="hidden" value="{{msg.id}}" name = "email_unfavorite">
+                <input type="submit"  value="Unfavorite Email" name="unfavorite_email">
+            </form>
+        {% else %}
+            <form action="#" method="get">
+                <input type="hidden" value="{{msg.id}}" name = "email_favorite">
+                <input type="submit"  value="Favorite Email" name="favorite_email">
+            </form>
+        {% endif %}
         <form action="#" method="get">
             <input type="hidden" value="{{msg.id}}" name = "email_delete">
             <input type="submit"  value="Delete Email" name="delete_email">
