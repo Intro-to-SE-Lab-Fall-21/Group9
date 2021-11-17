@@ -81,41 +81,48 @@ def inbox(request):
 	username = request.user.username
 	path = f"{settings.MEDIA_ROOT}/email_out"
 	files = os.listdir(path)
+	to_remove = ""
+	removed = False
+	if(request.GET.get('delete_email')):
+		if(request.GET.get('email_delete')):
+			to_remove = str(request.GET.get('email_delete'))
 	for filename in files:
-		with open(path+"/"+filename) as f:
-			lines = f.readlines()
-			i = 0
-			linesubj=""
-			linefrom=""
-			lineto=""
-			linedate=""
-			linemsg=""
-			for line in lines:
-				i = i+1
-				#ignore
-				if i <= 3 or i == 8:
-					pass
-				#subject
-				elif i == 4:
-					linesubj = line
-				#from
-				elif i == 5:
-					linefrom = line
-				#to
-				elif i == 6:
-					lineto = line
-					#if "To: "+username+"@gp9.com" in line:
-						#inbox += [filename]
-						#pass
-				#date
-				elif i == 7:
-					linedate = line
-				#message
-				else:
-					if "-------------------------------------------------------------------------------" in line:
+		if to_remove == filename:
+			os.remove(path+"/"+filename)
+		else:
+			with open(path+"/"+filename) as f:
+				lines = f.readlines()
+				i = 0
+				linesubj=""
+				linefrom=""
+				lineto=""
+				linedate=""
+				linemsg=""
+				lineid = ""
+				for line in lines:
+					i = i+1
+					#ignore
+					if i <= 3 or i == 8:
 						pass
+					#subject
+					elif i == 4:
+						linesubj = line
+					#from
+					elif i == 5:
+						linefrom = line
+					#to
+					elif i == 6:
+						lineto = line
+					#date
+					elif i == 7:
+						linedate = line
+					#message
 					else:
-						linemsg += line
+						if "-------------------------------------------------------------------------------" in line:
+							pass
+						else:
+							linemsg += line
 			if "to: "+username+"@gp9.com" in lineto.lower():
-				inbox.append({'subject': linesubj,'from':linefrom,'to':lineto,'date':linedate,'msg':linemsg})
+				#if not removed:
+				inbox.append({'subject': linesubj,'from':linefrom,'to':lineto,'date':linedate,'msg':linemsg,'id':filename})
 	return render(request, "inbox.html", context={"inbox": inbox})

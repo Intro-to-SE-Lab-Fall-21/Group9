@@ -15,12 +15,16 @@
         <ul>
         {% for msg in inbox %}
         <li>
+            
             {{ msg.subject }}<br>
             {{ msg.from }}<br>
-            {{ msg.to }}<br>
             {{ msg.date }}<br>
             {{ msg.msg}}<br>
         </li>
+        <form action="#" method="get">
+            <input type="hidden" value="{{msg.id}}" name = "email_delete">
+            <input type="submit"  value="Delete Email" name="delete_email">
+        </form>
         {% endfor %}
         </ul>
     {% else %}
